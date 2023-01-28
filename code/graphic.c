@@ -6,7 +6,7 @@
 /*   By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 08:05:16 by ebelfkih          #+#    #+#             */
-/*   Updated: 2023/01/28 03:21:08 by ebelfkih         ###   ########.fr       */
+/*   Updated: 2023/01/28 20:11:55 by ebelfkih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,12 @@ void	image_window(t_vars *vars, int i, int j, char *s)
 			* vars->img_height) + 10, 0xFF0000, msg);
 	free (msg);
 	msg = ft_strjoin(ft_strdup("brain : "), ft_itoa(brain));
-	mlx_string_put(vars->mlx, vars->win, 300, (vars->map_height
+	mlx_string_put(vars->mlx, vars->win, 165, (vars->map_height
 			* vars->img_height) + 10, 0xFF0000, msg);
 	free (msg);
 	msg = ft_strjoin(ft_strdup("score : "),
 			ft_itoa(((vars->p - brain) * 100) - vars->m_c * 4));
-	mlx_string_put(vars->mlx, vars->win, 600, (vars->map_height
+	mlx_string_put(vars->mlx, vars->win, 300, (vars->map_height
 			* vars->img_height) + 10, 0xFF0000, msg);
 	free (msg);
 }

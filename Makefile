@@ -6,7 +6,7 @@
 #    By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/14 10:59:06 by ebelfkih          #+#    #+#              #
-#    Updated: 2023/01/28 05:57:05 by ebelfkih         ###   ########.fr        #
+#    Updated: 2023/01/28 21:59:46 by ebelfkih         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,11 +28,11 @@ PURPLE = \033[0;35m
 all : $(NAME)
 
 $(NAME) : $(OBJ)
-	@echo "${RED} Start compiling ${GREEN} so_long ..."
+	@echo "${RED} Start compiling ${GREEN} so_long ${RED} and create ${GREEN} *.o ${RED} and ${GREEN}*.a ..."
 	@sleep 3
 	@$(AR) $(ONAME) $^
 	@$(CC) $(MAIN) $(ONAME) $(MLX) -o $@
-	@echo "${GREEN} so_long ${PURPLE} programe has been Created "
+	@echo "${GREEN} so_long, *.o and *.a ${PURPLE} has been Created "
 
 %.o : %.c code/so_long.h
 	@$(CC) -o $@ -c $<
@@ -45,4 +45,12 @@ fclean: clean
 	@$(RM) $(NAME) $(ONAME)
 	@echo "${RED} executable file removed"
 
+game :
+	@echo "${RED} Start compiling ${GREEN} so_long ..."
+	@sleep 1
+	@$(CC) $(FILES) $(MAIN) -o $(NAME) $(MLX) 
+	@echo "${GREEN} so_long ${PURPLE} programe has been Created "
+
 re: fclean all
+
+.PHONY = clean fclean re all

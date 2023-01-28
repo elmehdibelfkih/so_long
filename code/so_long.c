@@ -6,7 +6,7 @@
 /*   By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 14:58:40 by ebelfkih          #+#    #+#             */
-/*   Updated: 2023/01/28 05:14:14 by ebelfkih         ###   ########.fr       */
+/*   Updated: 2023/01/28 06:32:09 by ebelfkih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,9 @@ void	exit_message(int i)
 	message[6] = NULL;
 	write(1, message[i], strlen(message[i]));
 	ft_clear(message, 6);
-	exit(1);
+	if (i == 0 || i == 1 || i == 4 || i == 5)
+		exit(1);
+	exit(0);
 }
 
 int	main(int ac, char **av)
