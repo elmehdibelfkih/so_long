@@ -6,7 +6,7 @@
 /*   By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 05:58:14 by ebelfkih          #+#    #+#             */
-/*   Updated: 2023/01/29 02:18:30 by ebelfkih         ###   ########.fr       */
+/*   Updated: 2023/01/29 21:38:38 by ebelfkih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,10 @@ void	read_map(char *map, t_vars *vars)
 	}
 	close(fd);
 	if (ft_strnstr(s1, "\n\n", 10000000) != NULL)
-		return ;
+	{
+		free(s1);
+		exit_message(1, vars);
+	}
 	vars->t = ft_split(s1, '\n');
 	free(s1);
 }

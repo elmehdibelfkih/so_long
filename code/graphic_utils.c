@@ -6,7 +6,7 @@
 /*   By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 08:05:16 by ebelfkih          #+#    #+#             */
-/*   Updated: 2023/01/29 03:57:15 by ebelfkih         ###   ########.fr       */
+/*   Updated: 2023/01/29 21:56:01 by ebelfkih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,12 @@ void	exit_message(int i, t_vars *vars)
 	write(1, message[i], strlen(message[i]));
 	ft_clear(message, 8);
 	if (i == 0 || i == 1 || i == 4 || i == 5 || i == 6)
+	{
+		ft_clear(vars->t, vars->map_height);
 		exit(1);
+	}
 	mlx_destroy_window(vars->mlx, vars->win);
+	ft_clear(vars->t, vars->map_height);
 	exit(0);
 }
 
@@ -102,9 +106,9 @@ char	*ft_strjoin(char *s1, char *s2)
 	if (!s1 && !s2)
 		return (NULL);
 	if (!s1)
-		return (ft_strdup(s2));
+		return (free(s1), ft_strdup(s2));
 	if (!s2)
-		return (ft_strdup(s1));
+		return (free(s2), ft_strdup(s1));
 	s = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!s)
 		return (NULL);

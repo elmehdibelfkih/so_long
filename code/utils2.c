@@ -6,7 +6,7 @@
 /*   By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 09:18:33 by ebelfkih          #+#    #+#             */
-/*   Updated: 2023/01/29 03:47:06 by ebelfkih         ###   ########.fr       */
+/*   Updated: 2023/01/29 21:35:23 by ebelfkih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	ft_clear(char **spl, int p)
 	int	i;
 
 	i = 0;
+	if (!spl)
+		return (0);
 	while (i <= p)
 		free(spl[i++]);
 	free(spl);
