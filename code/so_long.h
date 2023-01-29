@@ -6,16 +6,14 @@
 /*   By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 03:00:06 by ebelfkih          #+#    #+#             */
-/*   Updated: 2023/01/28 05:38:48 by ebelfkih         ###   ########.fr       */
+/*   Updated: 2023/01/29 02:01:27 by ebelfkih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
-# endif
+# define BUFFER_SIZE 10
 
 # define CLOSE_DOOR "./images/close_door.xpm"
 # define  OPEN_DOOR "./images/open_door.xpm"
@@ -34,21 +32,18 @@
 # include <string.h>
 
 typedef struct s_vars {
-	char	**t;
-	void	*mlx;
-	void	*win;
-	void	*img;
-	char	*addr;
-	int		endian;
-	int		bits_per_pixel;
-	int		map_height;
-	int		map_width;
-	int		img_width;
-	int		img_height;
-	char	*player;
-	char	*door;
-	int		m_c;
-	int		p;
+	char			**t;
+	void			*mlx;
+	void			*win;
+	void			*img;
+	int				map_height;
+	unsigned int	map_width;
+	int				img_width;
+	int				img_height;
+	char			*player;
+	char			*door;
+	int				m_c;
+	int				p;
 }				t_vars;
 
 typedef struct s_int {
@@ -70,9 +65,9 @@ int		plen(char **spl, const char *s, char c);
 char	**ft_split(char const *s, char c);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 int		check_e_p_c(char **t);
-int		check_map(char **t, int *i);
-char	**read_map(char *map);
-int		check_path(char **t);
+void	check_map(t_vars *vars);
+void	read_map(char *map, t_vars *vars);
+void	check_path(t_vars *vars);
 void	player_up(t_vars *vars);
 void	player_down(t_vars *vars);
 void	player_left(t_vars *vars);
@@ -81,7 +76,7 @@ int		check_c(char **t);
 int		key_hook(int keycode, t_vars *vars);
 void	mlx_put_map_to_window(t_vars *vars);
 void	image_window(t_vars *vars, int i, int j, char *s);
-void	exit_message(int i);
+void	exit_message(int i, t_vars *vars);
 int		nbr_counter(int j);
 char	*ft_itoa(int n);
 

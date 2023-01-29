@@ -6,7 +6,7 @@
 /*   By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 05:58:14 by ebelfkih          #+#    #+#             */
-/*   Updated: 2023/01/28 01:25:24 by ebelfkih         ###   ########.fr       */
+/*   Updated: 2023/01/29 02:18:30 by ebelfkih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,19 @@ int	check_c(char **t)
 	return (m.c);
 }
 
-char	**read_map(char *map)
+void	read_map(char *map, t_vars *vars)
 {
 	int		fd;
 	int		i;
 	char	*s;
 	char	*s1;
-	char	**t;
 
+	vars->t = NULL;
 	i = BUFFER_SIZE;
 	s1 = NULL;
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
-		exit_message(4);
+		exit_message(4, vars);
 	while (i == BUFFER_SIZE)
 	{
 		s = ft_calloc(BUFFER_SIZE + 1, 1);
@@ -50,67 +50,66 @@ char	**read_map(char *map)
 	}
 	close(fd);
 	if (ft_strnstr(s1, "\n\n", 10000000) != NULL)
-		return (NULL);
-	t = ft_split(s1, '\n');
+		return ;
+	vars->t = ft_split(s1, '\n');
 	free(s1);
-	return (t);
 }
 
-int	check_map(char **t, int *i)
+void	check_map(t_vars *vars)
 {
 	int	j;
 
-	*i = -1;
-	j = -1;
-	if (!t)
-		return (0);
-	while (t[++*i])
+	if (!vars->t)
+		exit_message(1, vars);
+	vars->map_height = -1;
+	while (vars->t[++vars->map_height])
 	{
-		if (ft_strlen(t[*i]) != ft_strlen(t[0]))
-			return (0);
-		while (t[*i][++j])
+		j = -1;
+		if (ft_strlen(vars->t[vars->map_height]) != vars->map_width)
+			exit_message(1, vars);
+		while (vars->t[vars->map_height][++j])
 		{
-			if (i == 0 && t[*i][j] != '1')
-				return (0);
-			if (t[*i + 1] == NULL && t[*i][j] != '1')
-				return (0);
-			if (t[*i][0] != '1' || t[*i][ft_strlen(t[0]) - 1] != '1')
-				return (0);
+			if (vars->map_height == 0 && vars->t[vars->map_height][j] != '1')
+				exit_message(1, vars);
+			if (!vars->t[vars->map_height + 1]
+				&& vars->t[vars->map_height][j] != '1')
+				exit_message(1, vars);
+			if (vars->t[vars->map_height][0] != '1' ||
+				vars->t[vars->map_height][vars->map_width - 1] != '1')
+				exit_message(1, vars);
 		}
-		j = 0;
 	}
-	if (check_e_p_c(t) == 0)
-		return (0);
-	return (check_path(t));
+	if (!check_e_p_c(vars->t))
+		exit_message(1, vars);
 }
 
-int	check_path(char **t)
+void	check_path(t_vars *vars)
 {
 	t_int	m;
 
 	m.i = 0;
-	if (!t)
-		return (0);
-	while (t[++m.i])
+	if (!vars->t)
+		exit_message(1, vars);
+	while (vars->t[++m.i])
 	{
 		m.j = 0;
-		while (t[m.i][++m.j])
+		while (vars->t[m.i][++m.j])
 		{
-			if ((t[m.i][m.j] == '0' || t[m.i][m.j] == 'C') &&
-				(t[m.i][m.j - 1] == 'P' || t[m.i][m.j + 1] == 'P'
-				|| t[m.i - 1][m.j] == 'P' || t[m.i + 1][m.j] == 'P'))
+			if ((vars->t[m.i][m.j] == '0' || vars->t[m.i][m.j] == 'C') && (vars
+				->t[m.i][m.j - 1] == 'P' || vars->t[m.i][m.j + 1] == 'P' || vars
+				->t[m.i - 1][m.j] == 'P' || vars->t[m.i + 1][m.j] == 'P'))
 			{
-					t[m.i][m.j--] = 'P';
+					vars->t[m.i][m.j--] = 'P';
 					m.i--;
 			}
-			if (t[m.i][m.j] == 'E' && (t[m.i][m.j - 1] == 'P' || t[m.i][m.j + 1]
-				== 'P' || t[m.i - 1][m.j] == 'P' || t[m.i + 1][m.j] == 'P'))
+			if (vars->t[m.i][m.j] == 'E' && (vars->t[m.i][m.j - 1] == 'P'
+			|| vars->t[m.i][m.j + 1] == 'P' || vars->t[m.i - 1][m.j] == 'P'
+			|| vars->t[m.i + 1][m.j] == 'P'))
 				m.e = 1;
 		}
 	}
-	if (m.e == 1 && check_c(t) == 0)
-		return (m.e);
-	return (0);
+	if (m.e != 1 || check_c(vars->t) != 0)
+		exit_message(6, vars);
 }
 
 int	check_e_p_c(char **t)
