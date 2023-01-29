@@ -6,36 +6,11 @@
 /*   By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 06:38:19 by ebelfkih          #+#    #+#             */
-/*   Updated: 2023/01/29 03:47:54 by ebelfkih         ###   ########.fr       */
+/*   Updated: 2023/01/29 03:58:46 by ebelfkih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-char	*ft_strjoin(char *s1, char *s2)
-{
-	int		i;
-	int		j;
-	char	*s;
-
-	i = -1;
-	j = -1;
-	if (!s1 && !s2)
-		return (NULL);
-	if (!s1)
-		return (ft_strdup(s2));
-	if (!s2)
-		return (ft_strdup(s1));
-	s = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (!s)
-		return (NULL);
-	while (s1[++i])
-		s[i] = s1[i];
-	while (s2[++j])
-		s[i++] = s2[j];
-	s[i] = '\0';
-	return (free(s1), free(s2), s);
-}
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -89,23 +64,44 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strdup(const char *s1)
+int	nbr_counter(int j)
 {
-	size_t		i;
-	size_t		j;
-	char		*s2;
+	int	i;
 
-	if (!s1)
-		return (NULL);
-	i = ft_strlen(s1);
-	j = 0;
-	s2 = malloc(i * sizeof(char) + 1);
-	if (!s2)
-		return (NULL);
-	while (i >= j)
+	i = 0;
+	if (j < 0)
+		i++;
+	while (j != 0)
 	{
-		s2[j] = s1[j];
-		j++;
+		j = j / 10;
+		i++;
 	}
-	return (s2);
+	return (i);
+}
+
+char	*ft_itoa(int n)
+{
+	char	*s;
+	int		i;
+
+	i = nbr_counter(n);
+	if (n == 0)
+		return (ft_strdup("0"));
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	s = ft_calloc(i + 1, 1);
+	if (!s)
+		return (NULL);
+	i--;
+	if (n < 0)
+	{
+		s[0] = '-';
+		n = -n;
+	}
+	while (n)
+	{
+		s[i--] = (n % 10) + 48;
+		n = n / 10;
+	}
+	return (s);
 }

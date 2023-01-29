@@ -6,7 +6,7 @@
 /*   By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 07:44:28 by ebelfkih          #+#    #+#             */
-/*   Updated: 2023/01/29 03:48:52 by ebelfkih         ###   ########.fr       */
+/*   Updated: 2023/01/29 04:00:08 by ebelfkih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	key_hook(int keycode, t_vars *vars)
 {
-	// write(1, ft_itoa(keycode), 3);
 	mlx_clear_window(vars->mlx, vars->win);
 	if (keycode == 126 || keycode == 13)
 		player_up(vars);

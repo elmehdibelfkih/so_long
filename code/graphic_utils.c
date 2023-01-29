@@ -6,7 +6,7 @@
 /*   By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 08:05:16 by ebelfkih          #+#    #+#             */
-/*   Updated: 2023/01/29 03:52:35 by ebelfkih         ###   ########.fr       */
+/*   Updated: 2023/01/29 03:57:15 by ebelfkih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,44 +91,43 @@ void	exit_message(int i, t_vars *vars)
 	exit(0);
 }
 
-int	nbr_counter(int j)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	int	i;
-
-	i = 0;
-	if (j < 0)
-		i++;
-	while (j != 0)
-	{
-		j = j / 10;
-		i++;
-	}
-	return (i);
-}
-
-char	*ft_itoa(int n)
-{
-	char	*s;
 	int		i;
+	int		j;
+	char	*s;
 
-	i = nbr_counter(n);
-	if (n == 0)
-		return (ft_strdup("0"));
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
-	s = ft_calloc(i + 1, 1);
+	i = -1;
+	j = -1;
+	if (!s1 && !s2)
+		return (NULL);
+	if (!s1)
+		return (ft_strdup(s2));
+	if (!s2)
+		return (ft_strdup(s1));
+	s = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!s)
 		return (NULL);
-	i--;
-	if (n < 0)
-	{
-		s[0] = '-';
-		n = -n;
-	}
-	while (n)
-	{
-		s[i--] = (n % 10) + 48;
-		n = n / 10;
-	}
-	return (s);
+	while (s1[++i])
+		s[i] = s1[i];
+	while (s2[++j])
+		s[i++] = s2[j];
+	s[i] = '\0';
+	return (free(s1), free(s2), s);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	int		i;
+	int		j;
+	char	*s2;
+
+	i = ft_strlen(s1);
+	j = -1;
+	s2 = malloc(i * sizeof(char) + 1);
+	if (!s2)
+		return (NULL);
+	while (i >= ++j)
+		s2[j] = s1[j];
+	return (s2);
 }
