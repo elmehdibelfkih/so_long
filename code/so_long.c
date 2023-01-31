@@ -6,11 +6,16 @@
 /*   By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 14:58:40 by ebelfkih          #+#    #+#             */
-/*   Updated: 2023/01/29 21:21:24 by ebelfkih         ###   ########.fr       */
+/*   Updated: 2023/01/31 23:43:23 by ebelfkih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	esc(t_vars *vars)
+{
+	return (exit_message(7, vars), 0);
+}
 
 int	main(int ac, char **av)
 {
@@ -36,7 +41,7 @@ int	main(int ac, char **av)
 	vars.win = mlx_new_window(vars.mlx, vars.img_width * vars.map_width,
 			vars.img_height * vars.map_height + 60, "so long");
 	mlx_put_map_to_window(&vars);
-	mlx_hook(vars.win, 8, 1L << 5, key_hook, &vars);
 	mlx_hook(vars.win, 2, 1L << 0, key_hook, &vars);
+	mlx_hook(vars.win, 17, 1L << 17, esc, &vars);
 	mlx_loop(vars.mlx);
 }
