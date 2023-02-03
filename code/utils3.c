@@ -6,7 +6,7 @@
 /*   By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 08:21:13 by ebelfkih          #+#    #+#             */
-/*   Updated: 2023/02/03 08:26:20 by ebelfkih         ###   ########.fr       */
+/*   Updated: 2023/02/03 08:54:24 by ebelfkih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@ void	exit_message(int i, t_vars *vars)
 	message[5] = ft_strdup("invalide input !!");
 	message[6] = ft_strdup("invalide path !!");
 	message[7] = ft_strdup("exit : 0 error !!");
-	message[8] = NULL;
+	message[8] = ft_strdup("invalide image !!");
+	message[9] = NULL;
 	write(1, message[i], strlen(message[i]));
 	ft_clear(message, 8);
-	if (i == 0 || i == 1 || i == 4 || i == 5 || i == 6)
+	if (i == 0 || i == 1 || i == 4 || i == 5 || i == 6 || i == 8)
 	{
 		ft_clear(vars->t, vars->map_height);
 		exit(1);
@@ -81,22 +82,25 @@ char	*ft_strdup(const char *s1)
 
 void	vars_plen(t_vars *vars)
 {
-	vars->o_d_img = mlx_xpm_file_to_image(vars->mlx, "./images/open_door.xpm",
+	vars->o_d_img = mlx_xpm_file_to_image(vars->mlx,
+			"./ textures/open_door.xpm", &vars->img_height, &vars->img_width);
+	vars->c_d_img = mlx_xpm_file_to_image(vars->mlx,
+			"./ textures/close_door.xpm", &vars->img_height, &vars->img_width);
+	vars->b_img = mlx_xpm_file_to_image(vars->mlx, "./ textures/brain.xpm",
 			&vars->img_height, &vars->img_width);
-	vars->c_d_img = mlx_xpm_file_to_image(vars->mlx, "./images/close_door.xpm",
+	vars->p_1_img = mlx_xpm_file_to_image(vars->mlx, "./ textures/player1.xpm",
 			&vars->img_height, &vars->img_width);
-	vars->b_img = mlx_xpm_file_to_image(vars->mlx, "./images/brain.xpm",
+	vars->p_2_img = mlx_xpm_file_to_image(vars->mlx, "./ textures/player2.xpm",
 			&vars->img_height, &vars->img_width);
-	vars->p_1_img = mlx_xpm_file_to_image(vars->mlx, "./images/player1.xpm",
+	vars->p_img = mlx_xpm_file_to_image(vars->mlx, "./ textures/path.xpm",
 			&vars->img_height, &vars->img_width);
-	vars->p_2_img = mlx_xpm_file_to_image(vars->mlx, "./images/player2.xpm",
+	vars->w_img = mlx_xpm_file_to_image(vars->mlx, "./ textures/wall.xpm",
 			&vars->img_height, &vars->img_width);
-	vars->p_img = mlx_xpm_file_to_image(vars->mlx, "./images/path.xpm",
+	vars->t_img = mlx_xpm_file_to_image(vars->mlx, "./ textures/trap.xpm",
 			&vars->img_height, &vars->img_width);
-	vars->w_img = mlx_xpm_file_to_image(vars->mlx, "./images/wall.xpm",
-			&vars->img_height, &vars->img_width);
-	vars->t_img = mlx_xpm_file_to_image(vars->mlx, "./images/trap.xpm",
-			&vars->img_height, &vars->img_width);
+	if (!vars->o_d_img || !vars->c_d_img || !vars->b_img || !vars->p_1_img
+		|| !vars->p_2_img || !vars->p_img || !vars->w_img || !vars->t_img)
+		exit_message(8, vars);
 	vars->img_height = 60;
 	vars->img_width = 60;
 	vars->player = vars->p_1_img;

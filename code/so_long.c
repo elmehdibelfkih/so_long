@@ -6,7 +6,7 @@
 /*   By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 14:58:40 by ebelfkih          #+#    #+#             */
-/*   Updated: 2023/02/03 08:26:02 by ebelfkih         ###   ########.fr       */
+/*   Updated: 2023/02/03 09:13:35 by ebelfkih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	main(int ac, char **av)
 {
 	t_vars	vars;
 
-	vars_plen(&vars);
 	if (ac != 2)
 		exit_message(5, &vars);
 	if (!ft_strnstr(av[1] + (ft_strlen(av[1]) - 4), ".ber", 4))
@@ -27,6 +26,7 @@ int	main(int ac, char **av)
 	check_path(&vars);
 	ft_clear(vars.t, vars.map_height);
 	read_map(av[1], &vars);
+	vars_plen(&vars);
 	vars.p = check_c(&vars);
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, vars.img_width * vars.map_width,
