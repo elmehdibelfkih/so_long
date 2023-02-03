@@ -6,7 +6,7 @@
 #    By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/14 10:59:06 by ebelfkih          #+#    #+#              #
-#    Updated: 2023/02/02 02:00:52 by ebelfkih         ###   ########.fr        #
+#    Updated: 2023/02/03 08:31:35 by ebelfkih         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CC = cc -Wall -Werror -Wextra
 MLX = -lmlx -framework OpenGL -framework AppKit
 RM = rm -f
 AR = ar rc
-FILES = code/player_movement.c code/read_and_check_map.c code/utils.c code/utils2.c code/graphic_utils.c
+FILES = code/read_and_check_map.c code/utils.c code/utils2.c code/graphic.c code/utils3.c
 OBJ = $(FILES:.c=.o)
 
 RED = \033[0;31m

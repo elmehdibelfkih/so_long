@@ -6,7 +6,7 @@
 /*   By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 03:00:06 by ebelfkih          #+#    #+#             */
-/*   Updated: 2023/02/03 06:30:35 by ebelfkih         ###   ########.fr       */
+/*   Updated: 2023/02/03 08:26:33 by ebelfkih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,6 @@
 # define SO_LONG_H
 
 # define BUFFER_SIZE 20
-
-# define CLOSE_DOOR "./images/close_door.xpm"
-# define  OPEN_DOOR "./images/open_door.xpm"
-# define  BRAIN "./images/brain.xpm"
-# define  PLAYER1 "./images/player1.xpm"
-# define  PLAYER2 "./images/player2.xpm"
-# define  PATH "./images/path.xpm"
-# define  WALL "./images/wall.xpm"
-# define  TRAP "./images/trap.xpm"
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -77,18 +68,15 @@ int		check_e_p_c(char **t);
 void	check_map(t_vars *vars);
 void	read_map(char *map, t_vars *vars);
 void	check_path(t_vars *vars);
-void	player_up(t_vars *vars);
-void	player_down(t_vars *vars);
-void	player_left(t_vars *vars);
-void	player_right(t_vars *vars);
-int		check_c(char **t);
+void	player_mv(t_vars *vars, int i, int j);
+int		check_c(t_vars *vars);
 int		key_hook(int keycode, t_vars *vars);
 void	mlx_put_map_to_window(t_vars *vars);
 void	image_window(t_vars *vars, int i, int j, void	*img);
 void	exit_message(int i, t_vars *vars);
 int		nbr_counter(int j);
 char	*ft_itoa(int n);
-void	p_position(t_vars *vars);
-void	xpm_to_img(t_vars *vars);
+void	vars_plen(t_vars *vars);
+int		esc(t_vars *vars);
 
 #endif

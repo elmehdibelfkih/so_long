@@ -6,24 +6,31 @@
 /*   By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 05:58:14 by ebelfkih          #+#    #+#             */
-/*   Updated: 2023/01/29 21:38:38 by ebelfkih         ###   ########.fr       */
+/*   Updated: 2023/02/03 08:11:19 by ebelfkih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	check_c(char **t)
+int	check_c(t_vars *vars)
 {
 	t_int	m;
 
 	m.i = -1;
 	m.j = -1;
 	m.c = 0;
-	while (t[++m.i])
+	while (vars->t[++m.i])
 	{
-		while (t[m.i][++m.j])
-			if (t[m.i][m.j] == 'C')
+		while (vars->t[m.i][++m.j])
+		{
+			if (vars->t[m.i][m.j] == 'C')
 				m.c++;
+			if (vars->t[m.i][m.j] == 'P')
+			{
+				vars->i = m.i;
+				vars->j = m.j;
+			}
+		}
 		m.j = 0;
 	}
 	return (m.c);
@@ -111,7 +118,7 @@ void	check_path(t_vars *vars)
 				m.e = 1;
 		}
 	}
-	if (m.e != 1 || check_c(vars->t) != 0)
+	if (m.e != 1 || check_c(vars) != 0)
 		exit_message(6, vars);
 }
 
