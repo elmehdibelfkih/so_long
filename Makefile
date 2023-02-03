@@ -6,7 +6,7 @@
 #    By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/14 10:59:06 by ebelfkih          #+#    #+#              #
-#    Updated: 2023/01/29 03:53:01 by ebelfkih         ###   ########.fr        #
+#    Updated: 2023/02/02 02:00:52 by ebelfkih         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,14 +25,14 @@ GREEN = \033[0;32m
 PURPLE = \033[0;35m
 
 
-all : $(NAME)
+#  game: $(NAME)
 
-$(NAME) : $(OBJ)
-	@echo "${RED} Start compiling ${GREEN} so_long ${RED} and create ${GREEN} *.o ${RED} and ${GREEN}*.a ..."
-	@sleep 3
-	@$(AR) $(ONAME) $^
-	@$(CC) $(MAIN) $(ONAME) $(MLX) -o $@
-	@echo "${GREEN} so_long, *.o and *.a ${PURPLE} has been Created "
+# $(NAME) : $(OBJ)
+# 	@echo "${RED} Start compiling ${GREEN} so_long ${RED} and create ${GREEN} *.o ${RED} and ${GREEN}*.a ..."
+# 	@sleep 3
+# 	@$(AR) $(ONAME) $^
+# 	@$(CC) $(MAIN) $(ONAME) $(MLX) -o $@
+# 	@echo "${GREEN} so_long, *.o and *.a ${PURPLE} has been Created "
 
 %.o : %.c code/so_long.h
 	@$(CC) -o $@ -c $<
@@ -45,7 +45,7 @@ fclean: clean
 	@$(RM) $(NAME) $(ONAME)
 	@echo "${RED} executable file removed"
 
-game :
+all :
 	@echo "${RED} Start compiling ${GREEN} so_long ..."
 	@sleep 1
 	@$(CC) $(FILES) $(MAIN) -o $(NAME) $(MLX) 

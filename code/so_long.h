@@ -6,14 +6,14 @@
 /*   By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 03:00:06 by ebelfkih          #+#    #+#             */
-/*   Updated: 2023/01/29 03:47:37 by ebelfkih         ###   ########.fr       */
+/*   Updated: 2023/02/01 05:09:10 by ebelfkih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# define BUFFER_SIZE 10
+# define BUFFER_SIZE 20
 
 # define CLOSE_DOOR "./images/close_door.xpm"
 # define  OPEN_DOOR "./images/open_door.xpm"
