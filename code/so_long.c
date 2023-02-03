@@ -6,7 +6,7 @@
 /*   By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 14:58:40 by ebelfkih          #+#    #+#             */
-/*   Updated: 2023/02/01 05:12:31 by ebelfkih         ###   ########.fr       */
+/*   Updated: 2023/02/03 06:26:57 by ebelfkih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@ int	main(int ac, char **av)
 {
 	t_vars	vars;
 
+	xpm_to_img(&vars);
 	vars.img_height = 60;
 	vars.img_width = 60;
-	vars.player = PLAYER1;
+	vars.player = vars.p_1_img;
 	vars.m_c = 0;
-	vars.door = CLOSE_DOOR;
+	vars.door = vars.c_d_img;
 	if (ac != 2)
 		exit_message(5, &vars);
 	if (!ft_strnstr(av[1] + (ft_strlen(av[1]) - 4), ".ber", 4))
@@ -37,6 +38,7 @@ int	main(int ac, char **av)
 	ft_clear(vars.t, vars.map_height);
 	read_map(av[1], &vars);
 	vars.p = check_c(vars.t);
+	p_position(&vars);
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, vars.img_width * vars.map_width,
 			vars.img_height * vars.map_height + 60, "so long");

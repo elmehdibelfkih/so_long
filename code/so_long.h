@@ -6,7 +6,7 @@
 /*   By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 03:00:06 by ebelfkih          #+#    #+#             */
-/*   Updated: 2023/02/01 05:09:10 by ebelfkih         ###   ########.fr       */
+/*   Updated: 2023/02/03 06:30:35 by ebelfkih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,24 @@ typedef struct s_vars {
 	char			**t;
 	void			*mlx;
 	void			*win;
-	void			*img;
+	void			*c_d_img;
+	void			*o_d_img;
+	void			*b_img;
+	void			*p_1_img;
+	void			*p_2_img;
+	void			*p_img;
+	void			*w_img;
+	void			*t_img;
 	int				map_height;
 	unsigned int	map_width;
 	int				img_width;
 	int				img_height;
-	char			*player;
-	char			*door;
+	void			*player;
+	void			*door;
 	int				m_c;
 	int				p;
+	int				i;
+	int				j;
 }				t_vars;
 
 typedef struct s_int {
@@ -75,9 +84,11 @@ void	player_right(t_vars *vars);
 int		check_c(char **t);
 int		key_hook(int keycode, t_vars *vars);
 void	mlx_put_map_to_window(t_vars *vars);
-void	image_window(t_vars *vars, int i, int j, char *s);
+void	image_window(t_vars *vars, int i, int j, void	*img);
 void	exit_message(int i, t_vars *vars);
 int		nbr_counter(int j);
 char	*ft_itoa(int n);
+void	p_position(t_vars *vars);
+void	xpm_to_img(t_vars *vars);
 
 #endif

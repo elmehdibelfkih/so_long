@@ -6,7 +6,7 @@
 /*   By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 08:05:16 by ebelfkih          #+#    #+#             */
-/*   Updated: 2023/02/02 02:01:03 by ebelfkih         ###   ########.fr       */
+/*   Updated: 2023/02/03 06:31:18 by ebelfkih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	mlx_put_map_to_window(t_vars *vars)
 	int	j;
 
 	i = -1;
+	if (check_c(vars->t) == 0)
+		vars->door = vars->o_d_img;
 	while (vars->t[++i])
 	{
 		j = -1;
@@ -28,32 +30,25 @@ void	mlx_put_map_to_window(t_vars *vars)
 			if (vars->t[i][j] == 'E')
 				image_window(vars, i, j, vars->door);
 			if (vars->t[i][j] == 'C')
-				image_window(vars, i, j, BRAIN);
+				image_window(vars, i, j, vars->b_img);
 			if (vars->t[i][j] == '1')
-				image_window(vars, i, j, WALL);
+				image_window(vars, i, j, vars->w_img);
 			if (vars->t[i][j] == '0')
-				image_window(vars, i, j, PATH);
-			if (vars->t[i][j] == '0')
-				image_window(vars, i, j, PATH);
+				image_window(vars, i, j, vars->p_img);
 			if (vars->t[i][j] == 'N')
-				image_window(vars, i, j, TRAP);
+				image_window(vars, i, j, vars->t_img);
 		}
 	}
 }
 
-void	image_window(t_vars *vars, int i, int j, char *s)
+void	image_window(t_vars *vars, int i, int j, void	*img)
 {
 	char	*msg;
 	int		brain;
 
 	brain = check_c(vars->t);
-	if (brain == 0)
-		vars->door = OPEN_DOOR;
-	vars->img = mlx_xpm_file_to_image(vars->mlx, s,
-			&vars->img_height, &vars->img_width);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->img,
+	mlx_put_image_to_window(vars->mlx, vars->win, img,
 		vars->img_width * j, vars->img_height * i);
-	mlx_destroy_image(vars->mlx, vars->img);
 	msg = ft_strjoin(ft_strdup("mouvment : "), ft_itoa(vars->m_c));
 	mlx_string_put(vars->mlx, vars->win, 10, (vars->map_height
 			* vars->img_height) + 10, 0xFF0000, msg);
@@ -67,6 +62,26 @@ void	image_window(t_vars *vars, int i, int j, char *s)
 	mlx_string_put(vars->mlx, vars->win, 300, (vars->map_height
 			* vars->img_height) + 10, 0xFF0000, msg);
 	free (msg);
+}
+
+void	xpm_to_img(t_vars *vars)
+{
+	vars->o_d_img = mlx_xpm_file_to_image(vars->mlx, "./images/open_door.xpm",
+			&vars->img_height, &vars->img_width);
+	vars->c_d_img = mlx_xpm_file_to_image(vars->mlx, "./images/close_door.xpm",
+			&vars->img_height, &vars->img_width);
+	vars->b_img = mlx_xpm_file_to_image(vars->mlx, "./images/brain.xpm",
+			&vars->img_height, &vars->img_width);
+	vars->p_1_img = mlx_xpm_file_to_image(vars->mlx, "./images/player1.xpm",
+			&vars->img_height, &vars->img_width);
+	vars->p_2_img = mlx_xpm_file_to_image(vars->mlx, "./images/player2.xpm",
+			&vars->img_height, &vars->img_width);
+	vars->p_img = mlx_xpm_file_to_image(vars->mlx, "./images/path.xpm",
+			&vars->img_height, &vars->img_width);
+	vars->w_img = mlx_xpm_file_to_image(vars->mlx, "./images/wall.xpm",
+			&vars->img_height, &vars->img_width);
+	vars->t_img = mlx_xpm_file_to_image(vars->mlx, "./images/trap.xpm",
+			&vars->img_height, &vars->img_width);
 }
 
 void	exit_message(int i, t_vars *vars)
@@ -134,4 +149,25 @@ char	*ft_strdup(const char *s1)
 	while (i >= ++j)
 		s2[j] = s1[j];
 	return (s2);
+}
+
+void	p_position(t_vars *vars)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (vars->t[++i])
+	{
+		j = 0;
+		while (vars->t[i][++j])
+		{
+			if (vars->t[i][j] == 'P')
+			{
+				vars->i = i;
+				vars->j = j;
+				return ;
+			}
+		}
+	}
 }

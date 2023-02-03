@@ -6,7 +6,7 @@
 /*   By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 07:44:28 by ebelfkih          #+#    #+#             */
-/*   Updated: 2023/01/29 04:00:08 by ebelfkih         ###   ########.fr       */
+/*   Updated: 2023/02/03 06:29:56 by ebelfkih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	key_hook(int keycode, t_vars *vars)
 {
-	mlx_clear_window(vars->mlx, vars->win);
 	if (keycode == 126 || keycode == 13)
 		player_up(vars);
 	else if (keycode == 125 || keycode == 1)
@@ -25,120 +24,87 @@ int	key_hook(int keycode, t_vars *vars)
 		player_left(vars);
 	else if (keycode == 53)
 		exit_message(7, vars);
-	mlx_put_map_to_window(vars);
 	return (0);
 }
 
 void	player_up(t_vars *vars)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	while (vars->t[++i])
+	if (vars->t[vars->i][vars->j] == 'P'
+		&& vars->t[vars->i - 1][vars->j] != '1')
 	{
-		j = 0;
-		while (vars->t[i][++j])
-		{
-			if (vars->t[i][j] == 'P' && vars->t[i - 1][j] != '1')
-			{
-				if (vars->t[i - 1][j] == 'N')
-					exit_message(2, vars);
-				if (vars->t[i - 1][j] == 'E' && check_c(vars->t) != 0)
-					return ;
-				if (vars->t[i - 1][j] == 'E')
-					exit_message(3, vars);
-				vars->t[i][j] = '0';
-				vars->t[i - 1][j] = 'P';
-				vars->m_c++;
-				return ;
-			}
-		}
+		if (vars->t[vars->i - 1][vars->j] == 'N')
+			exit_message(2, vars);
+		if (vars->t[vars->i - 1][vars->j] == 'E' && check_c(vars->t) != 0)
+			return ;
+		if (vars->t[vars->i - 1][vars->j] == 'E')
+			exit_message(3, vars);
+		vars->t[vars->i][vars->j] = '0';
+		vars->t[--vars->i][vars->j] = 'P';
+		vars->m_c++;
+		mlx_clear_window(vars->mlx, vars->win);
+		mlx_put_map_to_window(vars);
+		return ;
 	}
 }
 
 void	player_down(t_vars *vars)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	while (vars->t[++i])
+	if (vars->t[vars->i][vars->j] == 'P'
+		&& vars->t[vars->i + 1][vars->j] != '1')
 	{
-		j = 0;
-		while (vars->t[i][++j])
-		{
-			if (vars->t[i][j] == 'P' && vars->t[i + 1][j] != '1')
-			{
-				if (vars->t[i + 1][j] == 'N')
-					exit_message(2, vars);
-				if (vars->t[i + 1][j] == 'E' && check_c(vars->t) != 0)
-					return ;
-				if (vars->t[i + 1][j] == 'E')
-					exit_message(3, vars);
-				vars->t[i][j] = '0';
-				vars->t[i + 1][j] = 'P';
-				vars->m_c++;
-				return ;
-			}
-		}
+		if (vars->t[vars->i + 1][vars->j] == 'N')
+			exit_message(2, vars);
+		if (vars->t[vars->i + 1][vars->j] == 'E' && check_c(vars->t) != 0)
+			return ;
+		if (vars->t[vars->i + 1][vars->j] == 'E')
+			exit_message(3, vars);
+		vars->t[vars->i][vars->j] = '0';
+		vars->t[++vars->i][vars->j] = 'P';
+		vars->m_c++;
+		mlx_clear_window(vars->mlx, vars->win);
+		mlx_put_map_to_window(vars);
+		return ;
 	}
 }
 
 void	player_right(t_vars *vars)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	vars->player = PLAYER2;
-	while (vars->t[++i])
+	vars->player = vars->p_2_img;
+	if (vars->t[vars->i][vars->j] == 'P'
+		&& vars->t[vars->i][vars->j - 1] != '1')
 	{
-		j = 0;
-		while (vars->t[i][++j])
-		{
-			if (vars->t[i][j] == 'P' && vars->t[i][j - 1] != '1')
-			{
-				if (vars->t[i][j - 1] == 'N')
-					exit_message(2, vars);
-				if (vars->t[i][j - 1] == 'E' && check_c(vars->t) != 0)
-					return ;
-				if (vars->t[i][j - 1] == 'E')
-					exit_message(3, vars);
-				vars->t[i][j] = '0';
-				vars->t[i][j - 1] = 'P';
-				vars->m_c++;
-				return ;
-			}
-		}
+		if (vars->t[vars->i][vars->j - 1] == 'N')
+			exit_message(2, vars);
+		if (vars->t[vars->i][vars->j - 1] == 'E' && check_c(vars->t) != 0)
+			return ;
+		if (vars->t[vars->i][vars->j - 1] == 'E')
+			exit_message(3, vars);
+		vars->t[vars->i][vars->j] = '0';
+		vars->t[vars->i][--vars->j] = 'P';
+		vars->m_c++;
+		mlx_clear_window(vars->mlx, vars->win);
+		mlx_put_map_to_window(vars);
+		return ;
 	}
 }
 
 void	player_left(t_vars *vars)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	vars->player = PLAYER1;
-	while (vars->t[++i])
-	{	
-		j = 0;
-		while (vars->t[i][++j])
-		{
-			if (vars->t[i][j] == 'P' && vars->t[i][j + 1] != '1')
-			{
-				if (vars->t[i][j + 1] == 'N')
-					exit_message(2, vars);
-				if (vars->t[i][j + 1] == 'E' && check_c(vars->t) != 0)
-					return ;
-				if (vars->t[i][j + 1] == 'E')
-					exit_message(3, vars);
-				vars->t[i][j] = '0';
-				vars->t[i][j + 1] = 'P';
-				vars->m_c++;
-				return ;
-			}
-		}
+	vars->player = vars->p_1_img;
+	if (vars->t[vars->i][vars->j] == 'P'
+		&& vars->t[vars->i][vars->j + 1] != '1')
+	{
+		if (vars->t[vars->i][vars->j + 1] == 'N')
+			exit_message(2, vars);
+		if (vars->t[vars->i][vars->j + 1] == 'E' && check_c(vars->t) != 0)
+			return ;
+		if (vars->t[vars->i][vars->j + 1] == 'E')
+			exit_message(3, vars);
+		vars->t[vars->i][vars->j] = '0';
+		vars->t[vars->i][++vars->j] = 'P';
+		vars->m_c++;
+		mlx_clear_window(vars->mlx, vars->win);
+		mlx_put_map_to_window(vars);
+		return ;
 	}
 }
