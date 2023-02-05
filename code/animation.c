@@ -6,7 +6,7 @@
 /*   By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 02:35:15 by ebelfkih          #+#    #+#             */
-/*   Updated: 2023/02/05 07:39:58 by ebelfkih         ###   ########.fr       */
+/*   Updated: 2023/02/05 17:08:57 by ebelfkih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,13 @@ int	enemy_movment(t_vars *vars)
 	j = (rand() % 3) - 1;
 	if (t % 1 == 0)
 	{
-		mv_n(vars, i, j);
-		mlx_clear_window(vars->mlx, vars->win);
+		mv_enemy(vars, i, j);
 		mlx_put_map_to_window(vars);
 	}
 	return (0);
 }
 
-void	mv_n(t_vars *vars, int i, int j)
+void	mv_enemy(t_vars *vars, int i, int j)
 {
 	t_int	m;
 
@@ -50,12 +49,16 @@ void	mv_n(t_vars *vars, int i, int j)
 	}
 }
 
-// void	size_map(t_vars	*vars)
-// {
-// 	int	x;
-// 	int	y;
-
-// 	mlx_get_screen_size(vars->mlx, &x, &y);
-// 	if (vars->map_height * vars->img_height > x || (int)(vars->map_width * vars->img_width) > y)
-// 		exit_message(8, vars);
-// }
+void	enemy_kill(t_vars *vars)
+{
+	if (vars->player == vars->p_2_img && vars->t[vars->i][vars->j - 1] == 'N')
+	{
+		vars->t[vars->i][vars->j - 1] = 'C';
+		mlx_put_map_to_window(vars);
+	}
+	if (vars->player == vars->p_1_img && vars->t[vars->i][vars->j + 1] == 'N')
+	{
+		vars->t[vars->i][vars->j + 1] = 'C';
+		mlx_put_map_to_window(vars);
+	}	
+}

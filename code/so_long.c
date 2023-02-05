@@ -6,7 +6,7 @@
 /*   By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 14:58:40 by ebelfkih          #+#    #+#             */
-/*   Updated: 2023/02/05 07:40:30 by ebelfkih         ###   ########.fr       */
+/*   Updated: 2023/02/05 18:47:13 by ebelfkih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	main(int ac, char **av)
 		exit_message(5, &vars);
 	if (!ft_strnstr(av[1] + (ft_strlen(av[1]) - 4), ".ber", 4))
 		exit_message(0, &vars);
+	vars.img_height = 65;
+	vars.img_width = 65;
 	read_map(av[1], &vars);
 	vars.map_width = ft_strlen(vars.t[0]);
 	check_map(&vars);

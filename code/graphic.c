@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graphic_utils.c                                    :+:      :+:    :+:   */
+/*   graphic.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 08:05:16 by ebelfkih          #+#    #+#             */
-/*   Updated: 2023/02/03 08:31:15 by ebelfkih         ###   ########.fr       */
+/*   Updated: 2023/02/05 17:07:15 by ebelfkih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,29 @@
 
 void	mlx_put_map_to_window(t_vars *vars)
 {
-	int	i;
-	int	j;
+	t_int	m;
 
-	i = -1;
+	m.i = -1;
 	if (check_c(vars) == 0)
 		vars->door = vars->o_d_img;
-	while (vars->t[++i])
+	mlx_clear_window(vars->mlx, vars->win);
+	while (vars->t[++m.i])
 	{
-		j = -1;
-		while (vars->t[i][++j])
+		m.j = -1;
+		while (vars->t[m.i][++m.j])
 		{
-			if (vars->t[i][j] == 'P')
-				image_window(vars, i, j, vars->player);
-			if (vars->t[i][j] == 'E')
-				image_window(vars, i, j, vars->door);
-			if (vars->t[i][j] == 'C')
-				image_window(vars, i, j, vars->b_img);
-			if (vars->t[i][j] == '1')
-				image_window(vars, i, j, vars->w_img);
-			if (vars->t[i][j] == '0')
-				image_window(vars, i, j, vars->p_img);
-			if (vars->t[i][j] == 'N')
-				image_window(vars, i, j, vars->t_img);
+			if (vars->t[m.i][m.j] == 'P')
+				image_window(vars, m.i, m.j, vars->player);
+			if (vars->t[m.i][m.j] == 'E')
+				image_window(vars, m.i, m.j, vars->door);
+			if (vars->t[m.i][m.j] == 'C')
+				image_window(vars, m.i, m.j, vars->b_img);
+			if (vars->t[m.i][m.j] == '1')
+				image_window(vars, m.i, m.j, vars->w_img);
+			if (vars->t[m.i][m.j] == '0')
+				image_window(vars, m.i, m.j, vars->p_img);
+			if (vars->t[m.i][m.j] == 'N')
+				image_window(vars, m.i, m.j, vars->t_img);
 		}
 	}
 }
@@ -76,6 +76,8 @@ int	key_hook(int keycode, t_vars *vars)
 		player_mv(vars, 0, 1);
 	else if (keycode == 53)
 		exit_message(7, vars);
+	else if (keycode == 49)
+		enemy_kill(vars);
 	return (0);
 }
 
@@ -99,7 +101,7 @@ void	player_mv(t_vars *vars, int i, int j)
 		vars->i += i;
 		vars->t[vars->i][vars->j] = 'P';
 		vars->m_c++;
-		mlx_clear_window(vars->mlx, vars->win);
+		// mlx_clear_window(vars->mlx, vars->win);
 		mlx_put_map_to_window(vars);
 		return ;
 	}
