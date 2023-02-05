@@ -6,7 +6,7 @@
 /*   By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 14:58:40 by ebelfkih          #+#    #+#             */
-/*   Updated: 2023/02/03 09:13:35 by ebelfkih         ###   ########.fr       */
+/*   Updated: 2023/02/05 07:40:30 by ebelfkih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ int	main(int ac, char **av)
 	mlx_put_map_to_window(&vars);
 	mlx_hook(vars.win, 2, 1L << 0, key_hook, &vars);
 	mlx_hook(vars.win, 17, 1L << 17, esc, &vars);
+	mlx_loop_hook(vars.mlx, enemy_movment, &vars);
 	mlx_loop(vars.mlx);
 }

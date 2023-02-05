@@ -6,7 +6,7 @@
 /*   By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 03:00:06 by ebelfkih          #+#    #+#             */
-/*   Updated: 2023/02/03 08:26:33 by ebelfkih         ###   ########.fr       */
+/*   Updated: 2023/02/04 16:10:21 by ebelfkih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <mlx.h>
+# include <time.h>
 # include <string.h>
 
 typedef struct s_vars {
@@ -78,5 +79,7 @@ int		nbr_counter(int j);
 char	*ft_itoa(int n);
 void	vars_plen(t_vars *vars);
 int		esc(t_vars *vars);
+int		enemy_movment(t_vars *vars);
+void	mv_n(t_vars *vars, int i, int j);
 
 #endif
