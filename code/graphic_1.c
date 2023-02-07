@@ -6,7 +6,7 @@
 /*   By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 08:05:16 by ebelfkih          #+#    #+#             */
-/*   Updated: 2023/02/05 17:07:15 by ebelfkih         ###   ########.fr       */
+/*   Updated: 2023/02/06 19:45:55 by ebelfkih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ void	player_mv(t_vars *vars, int i, int j)
 		vars->i += i;
 		vars->t[vars->i][vars->j] = 'P';
 		vars->m_c++;
-		// mlx_clear_window(vars->mlx, vars->win);
 		mlx_put_map_to_window(vars);
 		return ;
 	}

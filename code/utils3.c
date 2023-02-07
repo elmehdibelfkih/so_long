@@ -6,7 +6,7 @@
 /*   By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 08:21:13 by ebelfkih          #+#    #+#             */
-/*   Updated: 2023/02/05 18:46:47 by ebelfkih         ###   ########.fr       */
+/*   Updated: 2023/02/06 19:32:43 by ebelfkih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ void	vars_plen(t_vars *vars)
 			"./ textures/open_door.xpm", &vars->img_height, &vars->img_width);
 	vars->c_d_img = mlx_xpm_file_to_image(vars->mlx,
 			"./ textures/close_door.xpm", &vars->img_height, &vars->img_width);
-	vars->b_img = mlx_xpm_file_to_image(vars->mlx, "./ textures/collectible.xpm",
-			&vars->img_height, &vars->img_width);
+	vars->b_img = mlx_xpm_file_to_image(vars->mlx,
+			"./ textures/collectible.xpm", &vars->img_height, &vars->img_width);
 	vars->p_1_img = mlx_xpm_file_to_image(vars->mlx, "./ textures/player1.xpm",
 			&vars->img_height, &vars->img_width);
 	vars->p_2_img = mlx_xpm_file_to_image(vars->mlx, "./ textures/player2.xpm",
