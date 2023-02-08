@@ -6,7 +6,7 @@
 /*   By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 03:00:06 by ebelfkih          #+#    #+#             */
-/*   Updated: 2023/02/07 20:54:52 by ebelfkih         ###   ########.fr       */
+/*   Updated: 2023/02/08 18:45:37 by ebelfkih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,15 @@
 # include <string.h>
 
 typedef struct s_vars {
+	unsigned int	map_width;
+	int				map_height;
+	int				img_width;
+	int				img_height;
+	int				i;
+	int				j;
+	int				p;
+	int				m_c;
+	char			**t;
 	void			*mlx;
 	void			*win;
 	void			*door;
@@ -36,15 +45,6 @@ typedef struct s_vars {
 	void			*p_img;
 	void			*w_img;
 	void			*t_img;
-	char			**t;
-	int				map_height;
-	unsigned int	map_width;
-	int				img_width;
-	int				img_height;
-	int				m_c;
-	int				p;
-	int				i;
-	int				j;
 }				t_vars;
 
 typedef struct s_int {
