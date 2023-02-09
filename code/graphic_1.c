@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graphic.c                                          :+:      :+:    :+:   */
+/*   graphic_1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 08:05:16 by ebelfkih          #+#    #+#             */
-/*   Updated: 2023/02/06 19:45:55 by ebelfkih         ###   ########.fr       */
+/*   Updated: 2023/02/09 23:29:16 by ebelfkih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	image_window(t_vars *vars, int i, int j, void	*img)
 	mlx_string_put(vars->mlx, vars->win, 10, (vars->map_height
 			* vars->img_height) + 10, 0xFF0000, msg);
 	free (msg);
-	msg = ft_strjoin(ft_strdup("brain : "), ft_itoa(brain));
+	msg = ft_strjoin(ft_strdup("token : "), ft_itoa(brain));
 	mlx_string_put(vars->mlx, vars->win, 165, (vars->map_height
 			* vars->img_height) + 10, 0xFF0000, msg);
 	free (msg);
