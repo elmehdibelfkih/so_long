@@ -6,7 +6,7 @@
 /*   By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 03:00:06 by ebelfkih          #+#    #+#             */
-/*   Updated: 2023/02/08 18:45:37 by ebelfkih         ###   ########.fr       */
+/*   Updated: 2023/02/08 21:54:42 by ebelfkih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ typedef struct s_vars {
 	void			*o_d_img;
 	void			*b_img;
 	void			*p_1_img;
+	void			*p_11_img;
 	void			*p_2_img;
+	void			*p_22_img;
 	void			*p_img;
 	void			*w_img;
 	void			*t_img;

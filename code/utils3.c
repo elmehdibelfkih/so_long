@@ -6,7 +6,7 @@
 /*   By: ebelfkih <ebelfkih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 08:21:13 by ebelfkih          #+#    #+#             */
-/*   Updated: 2023/02/06 19:32:43 by ebelfkih         ###   ########.fr       */
+/*   Updated: 2023/02/09 21:34:39 by ebelfkih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	exit_message(int i, t_vars *vars)
 	message[9] = NULL;
 	write(1, message[i], strlen(message[i]));
 	ft_clear(message, 8);
+	if (i == 0)
+		exit(1);
 	if (i == 0 || i == 1 || i == 4 || i == 5 || i == 6 || i == 8)
 	{
 		ft_clear(vars->t, vars->map_height);
@@ -36,7 +38,7 @@ void	exit_message(int i, t_vars *vars)
 	}
 	mlx_destroy_window(vars->mlx, vars->win);
 	ft_clear(vars->t, vars->map_height);
-	exit(0);
+	exit(1);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
