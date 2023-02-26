@@ -33,7 +33,7 @@ void	exit_message(int i, t_vars *vars)
 		exit(1);
 	if (i == 0 || i == 1 || i == 4 || i == 5 || i == 6 || i == 8)
 	{
-		ft_clear(vars->t, vars->map_height);
+		ft_clear(vars->t, 10000);
 		exit(1);
 	}
 	mlx_destroy_window(vars->mlx, vars->win);

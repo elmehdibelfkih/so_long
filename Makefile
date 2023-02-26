@@ -34,6 +34,11 @@ PURPLE = \033[0;35m
 # 	@$(CC) $(MAIN) $(ONAME) $(MLX) -o $@
 # 	@echo "${GREEN} so_long, *.o and *.a ${PURPLE} has been Created "
 
+all :
+	@echo "${RED} Start compiling ${GREEN} so_long ..."
+	@sleep 1
+	@$(CC) $(FILES) $(MAIN) -o $(NAME) $(MLX) 
+	@echo "${GREEN} so_long ${PURPLE} programe has been Created "
 %.o : %.c code/so_long.h
 	@$(CC) -o $@ -c $<
 
@@ -45,11 +50,6 @@ fclean: clean
 	@$(RM) $(NAME) $(ONAME)
 	@echo "${RED} executable file removed"
 
-all :
-	@echo "${RED} Start compiling ${GREEN} so_long ..."
-	@sleep 1
-	@$(CC) $(FILES) $(MAIN) -o $(NAME) $(MLX) 
-	@echo "${GREEN} so_long ${PURPLE} programe has been Created "
 
 re: fclean all
 

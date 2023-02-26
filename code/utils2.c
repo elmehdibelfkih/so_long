@@ -36,7 +36,7 @@ int	ft_clear(char **spl, int p)
 	i = 0;
 	if (!spl)
 		return (0);
-	while (i <= p)
+	while (spl[i] && i <= p)
 		free(spl[i++]);
 	free(spl);
 	return (-1);
